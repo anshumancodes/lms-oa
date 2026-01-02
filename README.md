@@ -1,87 +1,67 @@
-# Leave Management System – Walkthrough
 
-I have successfully implemented the **Leave Management System** using **Next.js**, **PostgreSQL (Neon)**, and **Prisma**.
+# Leave Management System
 
----
+## Features
+- Email & password authentication
+- Role-based access (Employee / Manager)
+- Protected routes via middleware
+- Leave request submission and approval workflow
 
-##  Features Implemented
+## Authentication
+- Secure login page
+- Employees can view dashboard and request leaves
+- Managers can view, approve, or reject all leave requests
 
-### 1. User Authentication
-- **Login Page**: Secure login using email and password.
-- **Role-Based Access Control**:
-  - **Employees**
-    - View their dashboard
-    - Submit leave requests
-  - **Managers**
-    - View all leave requests
-    - Approve or reject requests
-- **Middleware**
-  - Protects routes based on authentication status.
+## Dashboard
+- **Employee**
+  - Leave balances (Vacation, Sick, Other)
+  - Personal leave requests with status
+- **Manager**
+  - Access to Manage Leaves page
 
----
+## Leave Requests
+- Leave type, date range, and reason
+- Required field validation
+- Server Actions for secure submission
 
-### 2. Dashboard
+## Leave Management
+- View all employee leave requests
+- Approve or reject requests
+- Real-time status updates using `revalidatePath`
 
-#### Employee View
-- Displays leave balances:
-  - Vacation
-  - Sick
-  - Other
-- Lists personal leave requests with their status.
+## Database
+- **User**: user details and role (EMPLOYEE / MANAGER)
+- **LeaveRequest**: leave data and status (PENDING / APPROVED / REJECTED)
+- **LeaveBalance**: available leave days per user
 
-#### Manager View
-- Includes a link to the **Manage Leaves** page.
+## Verification
+- Builds successfully (`npm run build`)
+- Prisma migrations and seed data applied
+- Full TypeScript support with Prisma types
 
----
-
-### 3. Leave Request Submission
-- **Form**
-  - Select leave type
-  - Choose start and end dates
-  - Enter reason for leave
-- **Validation**
-  - Ensures all required fields are filled.
-- **Server Actions**
-  - Handles leave submission securely.
-
----
-
-### 4. Leave Management (Admin)
-- **Admin Page**
-  - Lists all leave requests from employees.
-- **Approval Workflow**
-  - Managers can **Approve** or **Reject** requests.
-- **Status Updates**
-  - Real-time updates using **Server Actions** and `revalidatePath`.
-
----
-
-## 🗄️ Database Schema
-
-- **User**
-  - Stores user details and role (`EMPLOYEE` / `MANAGER`)
-- **LeaveRequest**
-  - Stores leave details and status (`PENDING`, `APPROVED`, `REJECTED`)
-- **LeaveBalance**
-  - Tracks available leave days for each user
-
----
-
-## ✅ Verification
-
-- **Build**
-  - Project builds successfully using `npm run build`
-- **Database**
-  - Prisma migrations applied
-  - Seed data inserted
-- **Type Safety**
-  - Full TypeScript support with Prisma-generated types
-
----
-
-## ▶️ How to Run
-
-1. Ensure `.env` contains the correct values:
+## Run Locally
+1. Configure `.env`:
    ```env
    DATABASE_URL=your_database_url
    AUTH_SECRET=your_auth_secret
+````
+
+2. Start the server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Test Credentials
+
+**Manager**
+
+* Email: `manager@example.com`
+* Password: `password123`
+
+**Employee**
+
+* Email: `employee@example.com`
+* Password: `password123`
+
+
